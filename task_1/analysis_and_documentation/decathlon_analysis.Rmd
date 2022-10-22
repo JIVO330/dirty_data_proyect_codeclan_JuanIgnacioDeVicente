@@ -1,0 +1,67 @@
+---
+title: "decathlon_analysis"
+author: "Nacho"
+date: "2022-10-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+A brief introduction to the dataset
+A list of any assumptions you have made
+The steps you took to clean the data (you don’t need to write out in detail every step, but a combination of commented code chunks with surrounding overall explanations would be great).
+The answers to the questions presented in the task brief
+Any other interesting analyses or conclusions you come across.
+
+**#Introduction
+
+**#Assumptions
+
+My first assumption is very simple, it is very sure I will have mistakes and errors so do simple things because I will waste a lot of time.
+I avoid to do assumptions, when I read the task's title I thought about the Decathlon's shops.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
