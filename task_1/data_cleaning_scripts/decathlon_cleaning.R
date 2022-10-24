@@ -1,5 +1,10 @@
 
 library(tidyverse)
+library(readr)
+library(janitor)  
+
+
+
 
 dirty_decathlon <- read_rds("raw_data/decathlon.rds")
 dirty_decathlon
@@ -27,54 +32,47 @@ view(clean_decathlon)
 
 # Save in a new folder.
 
-library(readr)
 
-#readr :: write_csv(clean_decathlon/"clean_data/clean_decathlon.csv")
- #"Error in FUN(left, right) : non-numeric argument to binary operator"
 
-write_csv(clean_decathlon,"clean_data/clean_decathlon.csv")
+
+write_csv(clean_decathlon,"clean_data/clean_decathlon.csv") # HAVE TO BE THE LAST THING TO DO
 
 # Call the  csv, change a new name and works with it.
 
-clean_deca <-read_csv("clean_data/clean_decathlon.csv")
+clean_deca <-read_csv("clean_data/clean_decathlon.csv") # It have to do it on Notebook
 
 clean_deca  
 
-library(janitor)  
+#Cleaning
 
 clean_deca %>% 
   names()
 
 view(clean_deca)
 
-clean_deca %>% 
-  rename("long_jump" = "Long.jump", "shot_put" = "Shot.put","high_jump" = "High.jump",
-         "110m_hurdle" = "110m.hurdle","discus" = "Discus",
+rename_clean_deca <- clean_deca %>% 
+  rename("run_100m" = "100m","long_jump" = "Long.jump", "shot_put" = "Shot.put","high_jump" = "High.jump",
+         "run_110m_hurdle" = "110m.hurdle","discus" = "Discus",
          "pole_vault" = "Pole.vault", "javeline" = "Javeline", 
-         "rank" = "Rank", "points" = "Points", "competition" = "Competition")
+         "rank" = "Rank", "points" = "Points", "competition" = "Competition",
+         "run_400m" = "400m","run_1500m" = "1500m" )
 
 
 
- 
-# #Who had the longest long jump seen in the data?
-# What was the average 100m time in each competition?
-#   Who had the highest total points across both competitions?
-#   What was the shot-put scores for the top three competitors in each competition?
-#   What was the average points for competitors who ran the 400m in less than 50 seconds vs. those than ran 400m in more than 50 seconds?
+rename_clean_deca
+
+# No visible missing values but it will be remove all of them just in case.
+
+rename_clean_deca %>% 
+  drop_na()
 
 
 
+# Re-write the  .csv
 
 
 
-
-
-
-
-
-
-
-
+write_csv(rename_clean_deca,"clean_data/clean_decathlon.csv")
 
 
 
