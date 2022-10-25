@@ -12,13 +12,26 @@ The steps you took to clean the data (you don’t need to write out in detail ev
 The answers to the questions presented in the task brief
 Any other interesting analyses or conclusions you come across.
 
-**#Introduction
-This data set  is the combination of two the results of two competitions  where the athletes had participated, although it is unknown the years one represents an Olympic games and the other is a french competition called Decastar. However not all the athletes in the table had participated in both competitions.
+#### **Introduction**
 
-**#Assumptions
+This data set  is the combination of two the results of two competitions  where the athletes had participated, although it is unknown the years, one represents the results during  an Olympic games and the other is from  a french competition called Decastar.
 
-My first assumption is very simple, it is very sure I will have mistakes and errors so do simple things because I will waste a lot of time.
-I avoid to do assumptions, when I read the task's title I thought about the Decathlon's shops.
+However not all the athletes in the table had participated in both competitions. Even, it is unclear that both data were from the same sport session.
+
+#### **Assumptions**
+
+The first assumption was very simple, it is very sure it will have mistakes and errors,so try to do simple things because it will waste a lot of time.
+
+It tries to avoid to do assumptions before open the data because when I read the task's title I thought it was about the Decathlon's shops. After I read the questions I realized my first mistake.
+
+At the beginning, I understood that all or mostly of the athletes were in both competitions, that is not true.
+
+Another assumption, I think it is wrong but I keep is the names
+
+#### **The steps you took to clean the data (you don’t need to write out in detail every step, but a combination of commented code chunks with surrounding overall explanations would be great).**
+
+The first step I took was run the tidyverse library, opened the raw data and assigned it a temporary name (dirty_decathlon).
+The second step was open the data and check columns name and row names. Due to misunderstand, I was sure that I was able to modify the raw data (decathlon.rds). In order to avoid that I change the temporary name to a working name (clean_decathlon).
 
 
 
@@ -26,12 +39,7 @@ I avoid to do assumptions, when I read the task's title I thought about the Deca
 
 
 
-
-
-
-
-
-
+#### **The answers to the questions presented in the task brief**
 
 
 
