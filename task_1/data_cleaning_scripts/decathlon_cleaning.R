@@ -10,15 +10,15 @@ dirty_decathlon <- read_rds("raw_data/decathlon.rds")
 dirty_decathlon
 view(dirty_decathlon)
 
-## The row names are the names of the athletes from the competition, not delete!. 
+## The rownames are the names of the athletes from the competition, not delete!. 
 
 
 clean_decathlon <- dirty_decathlon
 
-#clean_decathlon <- tibble :: rownames_to_column(clean_decathlon,"VALUE") . One option
+#rownames
 
 clean_decathlon<- clean_decathlon %>% 
-    rownames_to_column(var= "name")
+    rownames_to_column(var= "athlete_name")
 
 
 view(clean_decathlon)
@@ -75,6 +75,7 @@ rename_clean_deca %>%
 write_csv(rename_clean_deca,"clean_data/clean_decathlon.csv")
 
 
-
+## Note. Things I did not do during cleaning and now I know I should/ have to do as  pivot in order to avoid so many horizontal columns and convert them in one big.
+## Also, the column name, I realized it could be a bit unclear and it should be like "athletic_name".
 
 

@@ -7,7 +7,7 @@ output: html_notebook
 ```{r}
 library(tidyverse)
 library(here)
-
+library(dplyr)
 ```
 
 ```{r}
@@ -65,49 +65,33 @@ shot_put_score
 ```
 
 ```{r}
-#   5 What was the average points for competitors who ran the 400m in less than 50 seconds vs. those than ran 400m in more than 50 seconds?
+#   5 What was the average points for competitors who ran the 400m in less than 50 seconds vs. those than ran 400m in more than 50 seconds?    
 
-# average_points_400 <- rename_clean_deca %>% 
-#   group_by(name) %>% 
-#   filter(run_400m <50) %>% 
-#   arrange((desc(name)))
-# 
-# average_points_400
-#  view(average_points_400)
-  
-rename_clean_deca %>% 
-mean(run_400m)
+ average_points_400 <- rename_clean_deca%>% 
+  select(`run_400m`)%>%
+  mutate(under_50_secs_400m = if_else(`run_400m` < 50.00, "Yes", "No"))%>%
+  group_by(under_50_secs_400m)%>%
+  summarise(avg_points = mean(points))
 
 
-#group_by(mtcars, cyl) %>%                ## group by cylinder
-# mutate(rank = row_number(mpg)) %>%   ## rank by mpg
-#   filter(run_400m <= 3) %>%                ## top three for each cyl
-#   arrange(rank) %>%                    ## arrange each group by rank
-#   ungroup() %>%                        ## remove grouping
-#   arrange(desc(cyl))                   ## arrange all by cylinder (descending)
-
+average_points_400
 ```
-
-
-
-
-
-
-
-
 ```{r}
+library(dplyr)
+rename_clean_deca %>%
+  filter( run_400m > 50 )
 
-#   5 What was the average points for competitors who ran the 400m in less than 50 seconds vs. those than ran 400m in more than 50 seconds?
 
-# 
-# # group_by(mtcars, cyl) %>%                ## group by cylinder
-# mutate(rank = row_number(mpg)) %>%   ## rank by mpg
-#   filter(rank <= 3) %>%                ## top three for each cyl
-#   arrange(rank) %>%                    ## arrange each group by rank
-#   ungroup() %>%                        ## remove grouping
-#   arrange(desc(cyl))                   ## arrange all by cylinder (descending)
-# 
-# 
-# avg_points(400<50) , avg_points(400>50)
+
+
+average_points_400 <- rename_clean_deca%>% 
+  filter(run_400m)%>%
+  mutate(under_50_secs_400m = if_else(run_400m < 50.00, "Yes", "No"))%>%
+  group_by(under_50_secs_400m)%>%
+  summarise(avg_points = mean(points))
+
+
 ```
+
+
 

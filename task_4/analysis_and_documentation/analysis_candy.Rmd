@@ -1,0 +1,280 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+#mutate columns regex pivot all columns
+
+
+
+
+```{r}
+library(readxl)
+library(tidyverse)
+library(here)
+library(dplyr)
+library(janitor)
+
+
+candy_2015 <- read_excel(here("raw_data/boing-boing-candy-2015.xlsx"))
+candy_2016 <- read_excel(here("raw_data/boing-boing-candy-2016.xlsx"))
+candy_2017 <- read_excel(here("raw_data/boing-boing-candy-2017.xlsx"))
+
+names(candy_2015)
+```
+
+```{r}
+# try to remove columns by starts with
+clean_candy_2015 <- candy_2015 %>% select(-starts_with('P'))
+
+names(clean_candy_2015)
+```
+
+```{r}
+# Remove columns by range
+
+clean_candy_2015 <- candy_2015 %>% select(c(1:96))
+
+names(clean_candy_2015)
+```
+
+```{r}
+#Janitor, clean names
+janitor_clean_candy_2015 <- clean_candy_2015 %>% 
+  clean_names()
+
+view(janitor_clean_candy_2015)
+```
+
+```{r}
+rename_janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>% 
+  rename("age" ="how_old_are_you")
+
+view(rename_janitor_clean_candy_2015)
+```
+
+
+
+
+
+
+```{r}
+# # drop na . I did at the beginning, later I thought it was not a good idea
+# janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>% 
+#   drop_na()
+# view(janitor_clean_candy_2015)
+```
+
+
+
+
+
+
+
+
+```{r}
+#Start cleaning candy_2016
+
+names(candy_2016)
+```
+```{r}
+#remove columns by range
+clean_candy_2016 <- candy_2016 %>% select(-c(104:123))
+
+names(clean_candy_2016)
+```
+
+```{r}
+# Remove by column by index
+
+clean_candy_2016 <- clean_candy_2016 %>% 
+  select(-c(79,102))
+
+
+clean_candy_2016 <- clean_candy_2016 %>% 
+  select(-c(6))
+
+names(clean_candy_2016)
+
+```
+
+```{r}
+#janitor, clean names
+
+janitor_clean_candy_2016 <- clean_candy_2016 %>% 
+  clean_names()
+
+view(janitor_clean_candy_2016)
+
+
+
+rename_janitor_clean_candy_2016 <-janitor_clean_candy_2016 %>% 
+  rename("gender" = "your_gender","age" = "how_old_are_you")
+
+
+rename_janitor_clean_candy_2016
+view(rename_janitor_clean_candy_2016)
+names(rename_janitor_clean_candy_2016)
+```
+
+
+
+
+```{r}
+#more cleaning, not properly done
+
+rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
+  select(-c(6,8,12,19,22,23,26,27,31,38,43,93,100))
+
+
+rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
+  rename("toblerone_something_or_other" = "tolberone_something_or_other")
+
+names(rename_janitor_clean_candy_2016)
+
+view(rename_janitor_clean_candy_2016)
+```
+
+
+
+
+
+```{r}
+# # Drop NA. Same as 2015, I keep them.
+# janitor_clean_candy_2016 <- janitor_clean_candy_2016 %>% 
+#   drop_na()
+# 
+# view(janitor_clean_candy_2016)
+```
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+#Start cleanig data.
+names(candy_2017)
+view(candy_2017)
+```
+
+
+
+```{r}
+
+clean_candy_2017 <-candy_2017 %>% 
+  select(-c(1,2,6,12,15,21,2,23,27,31,32,38,43,69,81,105,107,108,113:120))
+
+names(clean_candy_2017)
+
+clean_candy_2017 <- clean_candy_2017 %>% 
+  select(-c(16,93:95))
+
+names(clean_candy_2017)
+
+clean_candy_2017 <- clean_candy_2017 %>% 
+  select(-c(6,14,18,24,82,89))
+
+names(clean_candy_2017)
+```
+
+```{r}
+
+#janitor
+
+janitor_clean_candy_2017 <- clean_candy_2017 %>% 
+  clean_names()
+
+view(janitor_clean_candy_2017)
+names(janitor_clean_candy_2017)
+```
+
+
+
+```{r}
+#Manually, rename columns, I was not able to create a loop for remove "q1:9_"
+
+rename_janitor_clean_candy_2017 <- janitor_clean_candy_2017 %>% 
+  rename("gender" =  "q2_gender","age" = "q3_age", "country" = "q4_country","100_grand_bar" ="q6_100_grand_bar", "those_odd_marshmallow_circus_peanut_things" =  "q6_those_odd_marshmallow_circus_peanut_things","three_musketeers"="q6_three_musketeers","toblerone_something_or_other" = "q6_tolberone_something_or_other", "trail_mix"="q6_trail_mix" ,"twix" ="q6_twix","whatchamacallit_bars"= "q6_whatchamacallit_bars","york_peppermint_patties"="q6_york_peppermint_patties","anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes"= "q6_anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes",  "black_jacks" ="q6_black_jacks",
+  "bonkers_the_candy" = "q6_bonkers_the_candy","bottle_caps"= "q6_bottle_caps","boxo_raisins" = "q6_boxo_raisins", "butterfinger" ="q6_butterfinger" ,    "cadbury_creme_eggs" = "q6_cadbury_creme_eggs", "candy_corn" = "q6_candy_corn", "caramellos"  = "q6_caramellos",  "chiclets"  ="q6_chiclets", "coffe_crisp" = "q6_coffee_crisp","dots" = "q6_dots","dove_bars" = "q6_dove_bars", "fuzzy_peaches" ="q6_fuzzy_peaches", "goo_goo_clusters" = "q6_goo_goo_clusters", "good_n_plenty" ="q6_good_n_plenty",  "gummy_bears_straight_up" = "q6_gummy_bears_straight_up" ,"hard_candy" ="q6_hard_candy","heath_bar" ="q6_heath_bar",  " hersheys_dark_chocolate"  = "q6_hersheys_dark_chocolate" ,"hershey_s_milk_chocolate"  ="q6_hershey_s_milk_chocolate" , "hersheys_kisses"  ="q6_hersheys_kisses",  "jolly_rancher_bad_flavor" = "q6_jolly_rancher_bad_flavor","jolly_ranchers_good_flavor" = "q6_jolly_ranchers_good_flavor" , "joy_joy_mit_iodine" ="q6_joy_joy_mit_iodine","junior_mints"="q6_junior_mints","senior_mints"="q6_senior_mints","kale_smoothie" ="q6_kale_smoothie", "kinder_happy_hippo" =  "q6_kinder_happy_hippo","kit_kat" ="q6_kit_kat" , "laffy_taffy" = "q6_laffy_taffy", "q6_lemon_heads"="q6_lemon_heads","licorice_not_black" = "q6_licorice_not_black",             "licorice_yes_black"="q6_licorice_yes_black" ,"lindt_truffle" = "q6_lindt_truffle", "lollipops" = "q6_lollipops" ,  "mars"= "q6_mars",  
+"maynards" = "q6_maynards", "mike_and_ike"  ="q6_mike_and_ike" ,"milk_duds" ="q6_milk_duds","milky_way" ="q6_milky_way" ,"regular_m_ms" ="q6_regular_m_ms",   "peanut_m_m_s"="q6_peanut_m_m_s", "blue_m_ms"  ="q6_blue_m_ms", "red_m_ms" ="q6_red_m_ms","green_party_m_ms"= "q6_green_party_m_ms",    "independent_m_ms"="q6_independent_m_ms", "minibags_of_chips"  = "q6_minibags_of_chips","mint_kisses" ="q6_mint_kisses" , "mint_juleps" ="q6_mint_juleps" , "mr_goodbar"= "q6_mr_goodbar" , "necco_wafers"= "q6_necco_wafers" , "nerds" = "q6_nerds","nestle_crunch"  ="q6_nestle_crunch" ,"nown_laters" ="q6_nown_laters", "peeps"  = "q6_peeps",  "pencils"  ="q6_pencils" ,"pixy_stix" = "q6_pixy_stix", "reese_s_peanut_butter_cups" ="q6_reese_s_peanut_butter_cups", "reeses_pieces"  = "q6_reeses_pieces" ,"reggie_jackson_bar" = "q6_reggie_jackson_bar", "rolos"  = "q6_rolos" ,           "sandwich_sized_bags_filled_with_boo_berry_crunch" =  "q6_sandwich_sized_bags_filled_with_boo_berry_crunch" , "skittles" = "q6_skittles" ,                   "smarties_american"  ="q6_smarties_american" , "smarties_commonwealth" = "q6_smarties_commonwealth" ,"snickers" =  "q6_snickers" ,                
+  "sourpatch_kids_i_e_abominations_of_nature" = "q6_sourpatch_kids_i_e_abominations_of_nature","spotted_dick" = "q6_spotted_dick", "starburst"  ="q6_starburst","sweet_tarts" = "q6_sweet_tarts" ,  "swedish_fish" = "q6_swedish_fish", "sweetums_a_friend_to_diabetes" =  "q6_sweetums_a_friend_to_diabetes" , "tic_tac" = "q6_tic_tacs", "lemon_heads" ="q6_lemon_heads" )
+
+
+# try to do a loop but I didnt know
+#for (col in ncolumnas)) {
+ # rename_janitor_clean_candy_2017[, col]
+#}
+
+
+
+
+
+rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
+  rename("mary_jane" = "anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes")
+
+
+
+
+view(rename_janitor_clean_candy_2017)
+names(rename_janitor_clean_candy_2017)
+
+```
+
+
+
+```{r}
+#more cleaning, rows = country at 2016-17, age = 2015-16
+
+#country 2016
+
+rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
+  select(country) %>% 
+  mutate(country = recode(country, viejo = nuevo, "us"= "USA"))
+
+
+
+rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
+  select(country) %>% 
+  mutate(country = recode(country,c("us","usa","United States of America") "us"= "USA"))
+
+
+
+
+students_big %>% 
+  select(travel_to_school) %>% 
+  mutate(
+    travel_to_school = recode(travel_to_school, "Bus" = "bus", "Car" = "car", "Walk" = "walk", .default = "Other")
+  )
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+```{r}
+
+#joins the tables
+
+
+
+
+
+
+
+```
+
+
