@@ -51,8 +51,23 @@ rename_janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>%
   rename("age" ="how_old_are_you")
 
 view(rename_janitor_clean_candy_2015)
+names(rename_janitor_clean_candy_2015)
 ```
 
+```{r}
+#remove more colums
+
+remove_col_rename_janitor_clean_candy_2015 <- rename_janitor_clean_candy_2015 %>% 
+  select(c(1:5,8:11,13:15,19:22,24:25,27:30,32,35:37,39:84,86:92,96))
+
+
+# remove_col_rename_janitor_clean_candy_2015 <- rename_janitor_clean_candy_2015 %>% 
+#   select(6,7,12,16,17,18,23,26,31,33,34,38,85,93,94,95)
+
+
+names(remove_col_rename_janitor_clean_candy_2015)
+
+```
 
 
 
@@ -64,6 +79,13 @@ view(rename_janitor_clean_candy_2015)
 #   drop_na()
 # view(janitor_clean_candy_2015)
 ```
+
+
+
+
+
+
+
 
 
 
@@ -130,9 +152,20 @@ rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>%
 rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
   rename("toblerone_something_or_other" = "tolberone_something_or_other")
 
-names(rename_janitor_clean_candy_2016)
 
-view(rename_janitor_clean_candy_2016)
+rename2_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
+  rename("country" = "which_country_do_you_live_in")
+
+
+
+
+remove_col_rename_janitor_clean_candy_2016 <- rename2_janitor_clean_candy_2016 %>% 
+  select(-c(6,9,15,16,17,18,19,22,25,28,32,57,76,81,87))
+
+names(remove_col_rename_janitor_clean_candy_2016)
+
+view(remove_col_rename_janitor_clean_candy_2016)
+
 ```
 
 
@@ -212,17 +245,14 @@ rename_janitor_clean_candy_2017 <- janitor_clean_candy_2017 %>%
 #}
 
 
-
-
-
 rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
   rename("mary_jane" = "anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes")
 
+remove_col_rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
+  select(-c(15,52,59,67))
 
-
-
-view(rename_janitor_clean_candy_2017)
-names(rename_janitor_clean_candy_2017)
+view(remove_col_rename_janitor_clean_candy_2017)
+names(remove_col_rename_janitor_clean_candy_2017)
 
 ```
 
@@ -231,33 +261,33 @@ names(rename_janitor_clean_candy_2017)
 ```{r}
 #more cleaning, rows = country at 2016-17, age = 2015-16
 
-#country 2016
+#country 2016 remove_col_rename_janitor_clean_candy_2016
 
-rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
-  select(country) %>% 
-  mutate(country = recode(country, viejo = nuevo, "us"= "USA"))
-
-
-
-rename_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>% 
-  select(country) %>% 
-  mutate(country = recode(country,c("us","usa","United States of America") "us"= "USA"))
+country_rename_janitor_clean_candy_2016 <- remove_col_rename_janitor_clean_candy_2016 %>%
+  mutate(country = recode(country,"us"= "USA", "england"= "UK","england" = "UK", "Unite states of America" = "USA", "England" = "UK", "uSA" = "USA", "france"=  "France", "croatia" = "Croatia", "USSA"= "USA","USA (I think but it's an election year so who can really tell)" = "USA" , "United States" = "USA","usa"= "USA","uk"= "UK","USA!" = "USA","U.S.A." = "USA","51.0" ="NA","canada"= "Canada","America"= "USA","USA! USA! USA!"= "USA","US"= "USA","United States of America" = "USA","united states"= "USA","Usa" ="USA","U.S."= "USA","Us" ="USA","US" = "USA","Units States" ="USA","belgium" = "Belgium","united states"= "USA","USA USA USA" ="USA", "the best one-usa" = "USA","españa"= "España","u.s."= "USA","United Kingdom"= "UK","hungary"= "Hungary", "united states of america" ="USA","United states" = "USA", "USA! USA!" = "USA"))
 
 
 
 
-students_big %>% 
-  select(travel_to_school) %>% 
-  mutate(
-    travel_to_school = recode(travel_to_school, "Bus" = "bus", "Car" = "car", "Walk" = "walk", .default = "Other")
-  )
-
-
-
-
+country_rename_janitor_clean_candy_2016
+# No work, why
+# country_rename_janitor_clean_candy_2016 <- remove_col_rename_janitor_clean_candy_2016 %>%
+#   mutate(country = recode(country,c("us","usa","United States of America")= "USA"))
 
 ```
 
+```{r}
+#country2017
+
+country_rename_janitor_clean_candy_2017 <- remove_col_rename_janitor_clean_candy_2017 %>%
+  mutate(country = recode(country,"us"= "USA", "england"= "UK","england" = "UK", "Unite states of America" = "USA", "England" = "UK", "uSA" = "USA", "france"=  "France", "croatia" = "Croatia", "USSA"= "USA","USA (I think but it's an election year so who can really tell)" = "USA" , "United States" = "USA","usa"= "USA","uk"= "UK","USA!" = "USA","U.S.A." = "USA","51.0" ="NA","canada"= "Canada","America"= "USA","USA! USA! USA!"= "USA","US"= "USA","United States of America" = "USA","united states"= "USA","Usa" ="USA","U.S."= "USA","Us" ="USA","US" = "USA","Units States" ="USA","belgium" = "Belgium","united states"= "USA","USA USA USA" ="USA", "the best one-usa" = "USA","españa"= "España","u.s."= "USA","United Kingdom"= "UK","hungary"= "Hungary", "united states of america" ="USA","United states" = "USA", "USA! USA!" = "USA","United staes" = "USA","u.s.a." ="USA","USAUSAUSA"= "USA","america"= "America","finland"="Findland","unhinged states"= "Unhinged states", "US of A"= "USA","Unites States" = "USA","The United States of America"= "USA", "The United States" = "USA", "Unied States" = "USA","germany" ="Germany","U S" = "USA","U.K." ="UK","unite satates" = "USA", "cascadaia"= "Cascadia","North Carolina" ="USA","Unhinged states" = "USA","cascadia" ="Cascadia", "canada"= "Canada","USA? Hard to tell anymore.." ="USA","'merica" = "America","Pittsburgh" ="USA","United State" = "USA","United Sates"= "USA","I pretend to be from Canada, but I am really from the United States" = "USA","United Stated" ="USA","Scotland"= "UK","New Jersey" = "USA","CANADA"="Canada","United ststes" = "USA","United Statss" = "USA","enland" = "UK","united States" = "UK","United Statea" = "USA","united ststes" = "USA","	
+USA USA USA!!!!"  = "USA"))
+
+
+
+view(country_rename_janitor_clean_candy_2017)
+
+```
 
 
 
