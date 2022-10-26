@@ -402,9 +402,6 @@ total_rates <- candy_master %>%
    filter(na.rm = TRUE)
    summarise(total_rates = n())
 
-total_rates
-?across
-
 ```
 
 
@@ -418,7 +415,7 @@ What was the average age of people who are going out trick or treating?
 average_people <-  candy_master %>%
   select(age,trick_or_treat) %>% 
    filter(trick_or_treat == "yes") %>%
-    mean(trick_or_treat =="yes", na.rm = TRUE)
+    mean(trick_or_treat == "yes", na.rm = TRUE)
 
 average_people
 ```
