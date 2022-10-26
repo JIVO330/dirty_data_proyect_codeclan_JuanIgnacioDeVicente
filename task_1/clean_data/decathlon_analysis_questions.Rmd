@@ -75,11 +75,13 @@ shot_put_score
 
 
 average_points_400
+
 ```
+
 ```{r}
 library(dplyr)
 rename_clean_deca %>%
-  filter( run_400m > 50 )
+  filter( run_400m > 50 & run_400m < 50 )
 
 
 
