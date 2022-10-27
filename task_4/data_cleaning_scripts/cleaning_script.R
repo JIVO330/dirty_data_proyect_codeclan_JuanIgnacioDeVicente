@@ -41,12 +41,10 @@ names(clean_candy_2015)
 
 
 
-#Janitor, clean names
+#Janitor, clean names, renames
 janitor_clean_candy_2015 <- clean_candy_2015 %>% 
   clean_names()
 
-view(janitor_clean_candy_2015)
-```
 
 
 rename_janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>% 
@@ -62,12 +60,6 @@ remove_col_rename_janitor_clean_candy_2015 <- rename_janitor_clean_candy_2015 %>
   select(c(1:5,8:11,13:15,19:22,24:25,27:30,32,35:37,39:84,86:92,96))
 
 
-# remove_col_rename_janitor_clean_candy_2015 <- rename_janitor_clean_candy_2015 %>% 
-#   select(6,7,12,16,17,18,23,26,31,33,34,38,85,93,94,95)
-
-
-names(remove_col_rename_janitor_clean_candy_2015)
-view(remove_col_rename_janitor_clean_candy_2015)
 
 
 
@@ -86,19 +78,6 @@ view(year_remove_col_rename_janitor_clean_candy_2015)
 age_year_remove_col_rename_janitor_clean_candy_2015 <- year_remove_col_rename_janitor_clean_candy_2015 %>% 
   mutate(age = str_replace(age,"\\..*", "")) %>% 
   mutate(age = as.numeric(age))
-
-# mutate(age = round(age,digit = 0))
-
-
-view(age_year_remove_col_rename_janitor_clean_candy_2015)
-
-
-# # drop na . I did at the beginning, later I thought it was not a good idea
-# janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>% 
-#   drop_na()
-# view(janitor_clean_candy_2015)
-
-
 
 
 
@@ -165,25 +144,15 @@ rename2_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>%
 remove_col_rename_janitor_clean_candy_2016 <- rename2_janitor_clean_candy_2016 %>% 
   select(-c(6,9,15,16,17,18,19,22,25,28,32,57,76,81,87))
 
-names(remove_col_rename_janitor_clean_candy_2016)
-
-view(remove_col_rename_janitor_clean_candy_2016)
-
 
 
 
 #change timeslap 2016
 
 
-
-
 year_remove_col_rename_janitor_clean_candy_2016 <-  remove_col_rename_janitor_clean_candy_2016 %>% 
   mutate(year = coalesce("2016"))
 
-
-
-
-view(year_remove_col_rename_janitor_clean_candy_2016)
 
 
 
@@ -195,8 +164,6 @@ age_year_remove_col_rename_janitor_clean_candy_2016 <- year_remove_col_rename_ja
 
 
 
-view(age_year_remove_col_rename_janitor_clean_candy_2016)
-
 #more cleaning
 
 #country 2016 remove_col_rename_janitor_clean_candy_2016
@@ -204,22 +171,6 @@ view(age_year_remove_col_rename_janitor_clean_candy_2016)
 country_year_remove_col_rename_janitor_clean_candy_2016 <- age_year_remove_col_rename_janitor_clean_candy_2016 %>%
   mutate(country = recode(country,"us"= "USA", "england"= "UK","england" = "UK", "Unite states of America" = "USA", "England" = "UK", "uSA" = "USA", "france"=  "France", "croatia" = "Croatia", "USSA"= "USA","USA (I think but it's an election year so who can really tell)" = "USA" , "United States" = "USA","usa"= "USA","uk"= "UK","USA!" = "USA","U.S.A." = "USA","51.0" ="NA","canada"= "Canada","America"= "USA","USA! USA! USA!"= "USA","US"= "USA","United States of America" = "USA","united states"= "USA","Usa" ="USA","U.S."= "USA","Us" ="USA","US" = "USA","Units States" ="USA","belgium" = "Belgium","united states"= "USA","USA USA USA" ="USA", "the best one-usa" = "USA","españa"= "España","u.s."= "USA","United Kingdom"= "UK","hungary"= "Hungary", "united states of america" ="USA","United states" = "USA", "USA! USA!" = "USA"))
 
-
-
-
-view(country_year_remove_col_rename_janitor_clean_candy_2016)
-# No work, why
-# country_rename_janitor_clean_candy_2016 <- remove_col_rename_janitor_clean_candy_2016 %>%
-#   mutate(country = recode(country,c("us","usa","United States of America")= "USA"))
-
-
-
-
-# # Drop NA. Same as 2015, I keep them.
-# janitor_clean_candy_2016 <- janitor_clean_candy_2016 %>% 
-#   drop_na()
-# 
-# view(janitor_clean_candy_2016)
 
 
 
@@ -232,17 +183,6 @@ view(candy_2017)
 clean_candy_2017 <-candy_2017 %>% 
   select(-c(6,12,19,21,22,23,25,26,27,31,35,38,43,69,70,75,81,96,104,105,107,108,110:120))
 
-names(clean_candy_2017)
-#No more cleaning
-# clean_candy_2017 <- clean_candy_2017 %>% 
-#   select(-c(16,93:95))
-# 
-# names(clean_candy_2017)
-# 
-# clean_candy_2017 <- clean_candy_2017 %>% 
-#   select(-c(6,14,18,24,82,89))
-# 
-# names(clean_candy_2017)
 
 #janitor
 
@@ -262,21 +202,11 @@ rename_janitor_clean_candy_2017 <- janitor_clean_candy_2017 %>%
          "sourpatch_kids_i_e_abominations_of_nature" = "q6_sourpatch_kids_i_e_abominations_of_nature","spotted_dick" = "q6_spotted_dick", "starburst"  ="q6_starburst","sweet_tarts" = "q6_sweet_tarts" ,  "swedish_fish" = "q6_swedish_fish",  "tic_tac" = "q6_tic_tacs", "lemon_heads" ="q6_lemon_heads" )
 
 
-# try to do a loop but I didnt know
-#for (col in ncolumnas)) {
-# rename_janitor_clean_candy_2017[, col]
-#}
 
 
 rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
   rename("year" = "internal_id","trick_or_treat" = "q1_going_out","mary_janes" = "anonymous_brown_globs_that_come_in_black_and_orange_wrappers_a_k_a_mary_janes","any_full_sized_candy_bar" = "q6_any_full_sized_candy_bar" )
 
-#No more remove columns
-# # remove_col_rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
-#   select(-c(15,52,59,67))
-
-view(rename_janitor_clean_candy_2017)
-names(rename_janitor_clean_candy_2017)
 
 
 #Changeinternal_id for year 2017
@@ -285,8 +215,6 @@ names(rename_janitor_clean_candy_2017)
 year_rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
   mutate(year = coalesce("2017"))
 
-view(year_rename_janitor_clean_candy_2017)
-```
 
 
 #country2017
@@ -317,13 +245,16 @@ candy_master <- bind_rows(age_year_remove_col_rename_janitor_clean_candy_2015,
 view(candy_master)
 
 
+## Problems with variable age and the kind of numbers. Resolve
+
+candy_master %>% 
+  mutate(age = str_replace(age,"\\..*", "")) %>% 
+  mutate(age = as.numeric(age))
+
+candy_master$age[candy_master$age > 120] <- 0
 
 write_csv(candy_master,"../clean_data/candy_master.csv")
 
-
-
-
-```
 
 
 

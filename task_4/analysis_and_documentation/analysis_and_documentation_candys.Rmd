@@ -1,0 +1,78 @@
+---
+title: "candys"
+author: "Juan Ignacio De Vicente"
+date: "2022-10-25"
+output: html_document
+---
+
+
+
+
+
+#### **A brief Introduction to the data set**
+
+Who doesn't like candys? This data set is an overview about the consumers' taste during the years 2015,2016 and 2017. This survey was carry out in USA,so mainly it reflected the candy context in that country.However, there were a small proportion of participants from others countries.
+
+
+
+
+#### **Assumptions**
+
+My first assumption was before open the Task, I already knew I would have a lot of issues with the data in every stage of the process from star cleaning to answered the questions.
+
+After the cleaning process - you never finish- I understood I should have a clear understandable of the data and the questions and a strategic before start tiding about columns/ variables (rename, keep or remove, class of data, number of columns per year), or rows/ observations ( leave or remove NA, )
+
+I investigated the possibility to have all the variables in alphabetical order. I saw that in order to do that I should change the names during the cleaning process if I wanted to have few specific variables at the start of the table like "year" or "age"
+
+At the start of the cleaning, I wanted to drop all NA values because I thought it would help me during the analysis, but later after read the questions I fell I could not do that, because it was like cheat. After the first question I realized, I should done it.  
+
+
+
+
+
+#### **Cleaning steps.The steps you took to clean the data (you don’t need to write out in detail every step, but a combination of commented code chunks with surrounding overall explanations would be great).**
+
+After import 
+
+
+
+
+Every time I did any operation, I run the functions "view()" and "name()" to check if it was done what I wanted to do. I delete them from the "cleaning_script.R"
+
+
+
+
+
+The last cleaning was done on Thursday. When I tried to resolve question 2, I saw that there was a problem with the data on the variable "age"and I tried to resolve. There were numbers with decimals. 
+
+```{r, eval = FALSE}
+candy_master %>% 
+  mutate(age = str_replace(age,"\\..*", "")) %>% 
+  mutate(age = as.numeric(age))
+
+candy_master$age[candy_master$age > 120] <- 0
+```
+Also, in question 4 , it was needed to do a pivot_longer to convert all the candy  columns in observations and made easier the ratings.However, in this occasion , it was not modified the final file "candy_master".  
+
+```{r, eval = FALSE}
+  pivot_candy_master <- candy_master %>% 
+  pivot_longer(cols = -c(1:3),names_to = "candy_question", values_to = "candy_rating")
+```
+
+
+
+
+
+
+#### **Answers**
+
+
+
+
+
+
+
+
+
+
+#### **Comments and conclusions you come across**
