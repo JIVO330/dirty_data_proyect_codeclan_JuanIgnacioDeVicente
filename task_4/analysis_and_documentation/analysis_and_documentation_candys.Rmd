@@ -11,7 +11,7 @@ output: html_document
 
 #### **A brief Introduction to the data set**
 
-Who doesn't like candys? This data set is an overview about the consumers' taste during the years 2015,2016 and 2017. This survey was carry out in USA,so mainly it reflected the candy context in that country.However, there were a small proportion of participants from others countries. The value of each candy was marked as "JOY","MEH" and "DESPAIR".
+Who doesn't like candy? This data set is an overview about the consumers' taste during the years 2015,2016 and 2017. This survey was carry out in USA,so mainly it reflected the candy context in that country.However, there were a small proportion of participants from others countries. The value of each candy was marked as "JOY","MEH" and "DESPAIR".
 
 
 
@@ -41,13 +41,7 @@ I opened each year once I considered I was finished with the previous year. In e
 I mutate one column to have one "2017".And i experimented issues with the age column and I tried to resolve. However, during the first question I understood I did not do it properly and I did again.
 In addition, I used "pivot_longer" in order to answered  question 4
 
-
-
-
 Every time I did any operation, I run the functions "view()" and "name()" to check if it was done what I wanted to do. I delete them from the "cleaning_script.R"
-
-
-
 
 
 The last cleaning was done on Thursday. When I tried to resolve question 2, I saw that there was a problem with the data on the variable "age"and I tried to resolve. There were numbers with decimals. 
@@ -166,10 +160,5 @@ Q8 What was the most popular candy bar by this rating for people in US, Canada, 
 ```
 
 
-
-
-
-
-
-
-#### **Comments and conclusions you come across**
+#### **Comments and conclusions**
+I need to improve the way I am thinking 

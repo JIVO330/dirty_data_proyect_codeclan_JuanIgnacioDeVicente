@@ -237,7 +237,7 @@ candy_master <- bind_rows(age_year_remove_col_rename_janitor_clean_candy_2015,
 
 
 
-## Problems with variable age and the kind of numbers. Resolve
+## Problems with the data contained in variable "age". How I tried to resolve
 
 candy_master %>% 
   mutate(age = str_replace(age,"\\..*", "")) %>% 

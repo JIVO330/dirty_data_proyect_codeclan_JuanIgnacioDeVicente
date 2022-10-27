@@ -236,22 +236,11 @@ country_year_remove_col_rename_janitor_clean_candy_2016 <- age_year_remove_col_r
 # view(janitor_clean_candy_2016)
 ```
 
-
-
-
-
-
-
-
-
-
-
 ```{r}
 #Start cleanig data.
 #names(candy_2017)
 #view(candy_2017)
 ```
-
 
 
 ```{r}
@@ -282,8 +271,6 @@ janitor_clean_candy_2017 <- clean_candy_2017 %>%
 #view(janitor_clean_candy_2017)
 #names(janitor_clean_candy_2017)
 ```
-
-
 
 ```{r}
 #Manually, rename columns, I was not able to create a loop for remove "q1:9_"
@@ -373,7 +360,7 @@ write_csv(candy_master,"../clean_data/candy_master.csv")
 
 
 ```{r}
-#try to put in alphabetical order columns. But not interested
+#try to put in alphabetical order columns. But the result obtained was inaprpopiate
 candy_masterAZ = candy_master [ , order(c(names(candy_master)))]
 names (candy_masterAZ)
 ```
@@ -475,10 +462,11 @@ What was the most popular candy bar by this rating system for each gender in the
 What was the most popular candy bar in each year?
 
 ```{r}
+#It is not the answer
   pivot_candy_master %>% 
    filter(year == "2015") %>% 
-    group_by(candy_question) %>% 
-     count(candy_question) %>% 
+    group_by(candy_rating) %>% 
+     count() %>% 
       arrange(desc(n))
 
 # Answer. 2015. 
