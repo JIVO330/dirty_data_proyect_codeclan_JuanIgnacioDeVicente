@@ -22,7 +22,10 @@ candy_2015 <- read_excel(here("raw_data/boing-boing-candy-2015.xlsx"))
 candy_2016 <- read_excel(here("raw_data/boing-boing-candy-2016.xlsx"))
 candy_2017 <- read_excel(here("raw_data/boing-boing-candy-2017.xlsx"))
 
+#Final candy_master.csv 
+here:here()
 
+master_candy <- read_csv(here("clean-data/candy_master.csv"))
 
 
 names(candy_2015)
@@ -30,14 +33,12 @@ names(candy_2015)
 # try to remove columns by starts with
 clean_candy_2015 <- candy_2015 %>% select(-starts_with('P'))
 
-names(clean_candy_2015)
 
 
-# Remove columns by range
+# Remove columns by range. More than remove , I keep the columns I am interested
 
 clean_candy_2015 <- candy_2015 %>% select(c(1:96))
 
-names(clean_candy_2015)
 
 
 
@@ -50,8 +51,7 @@ janitor_clean_candy_2015 <- clean_candy_2015 %>%
 rename_janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>% 
   rename("age" ="how_old_are_you", "year"= "timestamp","trick_or_treat" = "are_you_going_actually_going_trick_or_treating_yourself")
 
-view(rename_janitor_clean_candy_2015)
-names(rename_janitor_clean_candy_2015)
+
 
 
 #remove more colums
@@ -69,7 +69,7 @@ remove_col_rename_janitor_clean_candy_2015 <- rename_janitor_clean_candy_2015 %>
 year_remove_col_rename_janitor_clean_candy_2015 <-  remove_col_rename_janitor_clean_candy_2015 %>% 
   mutate(year = coalesce("2015"))
 
-view(year_remove_col_rename_janitor_clean_candy_2015)
+
 
 
 
@@ -89,7 +89,7 @@ names(candy_2016)
 #remove columns by range
 clean_candy_2016 <- candy_2016 %>% select(-c(104:123))
 
-names(clean_candy_2016)
+
 
 
 
@@ -102,7 +102,7 @@ clean_candy_2016 <- clean_candy_2016 %>%
 clean_candy_2016 <- clean_candy_2016 %>% 
   select(-c(6))
 
-names(clean_candy_2016)
+
 
 
 
@@ -111,7 +111,7 @@ names(clean_candy_2016)
 janitor_clean_candy_2016 <- clean_candy_2016 %>% 
   clean_names()
 
-view(janitor_clean_candy_2016)
+#view(janitor_clean_candy_2016)
 
 
 
@@ -119,9 +119,7 @@ rename_janitor_clean_candy_2016 <-janitor_clean_candy_2016 %>%
   rename("gender" = "your_gender","age" = "how_old_are_you")
 
 
-rename_janitor_clean_candy_2016
-view(rename_janitor_clean_candy_2016)
-names(rename_janitor_clean_candy_2016)
+
 
 
 
@@ -174,9 +172,7 @@ country_year_remove_col_rename_janitor_clean_candy_2016 <- age_year_remove_col_r
 
 
 
-#Start cleanig data.
-names(candy_2017)
-view(candy_2017)
+#Start cleaning data 2017.
 
 
 
@@ -189,8 +185,6 @@ clean_candy_2017 <-candy_2017 %>%
 janitor_clean_candy_2017 <- clean_candy_2017 %>% 
   clean_names()
 
-view(janitor_clean_candy_2017)
-names(janitor_clean_candy_2017)
 
 
 #Manually, rename columns, I was not able to create a loop for remove "q1:9_"
@@ -234,15 +228,13 @@ age_country_rename_janitor_clean_candy_2017 <- country_rename_janitor_clean_cand
 
 #joins the tables the master tables and save as csv
 
-view(age_year_remove_col_rename_janitor_clean_candy_2015)
-view(country_year_remove_col_rename_janitor_clean_candy_2016)
-view(age_country_rename_janitor_clean_candy_2017)
+
 
 
 candy_master <- bind_rows(age_year_remove_col_rename_janitor_clean_candy_2015,
                           country_year_remove_col_rename_janitor_clean_candy_2016,age_country_rename_janitor_clean_candy_2017)
 
-view(candy_master)
+
 
 
 ## Problems with variable age and the kind of numbers. Resolve

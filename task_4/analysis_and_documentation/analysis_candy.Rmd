@@ -20,14 +20,14 @@ candy_2015 <- read_excel(here("raw_data/boing-boing-candy-2015.xlsx"))
 candy_2016 <- read_excel(here("raw_data/boing-boing-candy-2016.xlsx"))
 candy_2017 <- read_excel(here("raw_data/boing-boing-candy-2017.xlsx"))
 
-names(candy_2015)
+#names(candy_2015)
 ```
 
 ```{r}
 # try to remove columns by starts with
 clean_candy_2015 <- candy_2015 %>% select(-starts_with('P'))
 
-names(clean_candy_2015)
+#names(clean_candy_2015)
 ```
 
 ```{r}
@@ -35,7 +35,7 @@ names(clean_candy_2015)
 
 clean_candy_2015 <- candy_2015 %>% select(c(1:96))
 
-names(clean_candy_2015)
+#names(clean_candy_2015)
 ```
 
 ```{r}
@@ -43,15 +43,15 @@ names(clean_candy_2015)
 janitor_clean_candy_2015 <- clean_candy_2015 %>% 
   clean_names()
 
-view(janitor_clean_candy_2015)
+#view(janitor_clean_candy_2015)
 ```
 
 ```{r}
 rename_janitor_clean_candy_2015 <- janitor_clean_candy_2015 %>% 
   rename("age" ="how_old_are_you", "year"= "timestamp","trick_or_treat" = "are_you_going_actually_going_trick_or_treating_yourself")
 
-view(rename_janitor_clean_candy_2015)
-names(rename_janitor_clean_candy_2015)
+#view(rename_janitor_clean_candy_2015)
+#names(rename_janitor_clean_candy_2015)
 ```
 
 ```{r}
@@ -65,8 +65,8 @@ remove_col_rename_janitor_clean_candy_2015 <- rename_janitor_clean_candy_2015 %>
 #   select(6,7,12,16,17,18,23,26,31,33,34,38,85,93,94,95)
 
 
-names(remove_col_rename_janitor_clean_candy_2015)
-view(remove_col_rename_janitor_clean_candy_2015)
+#names(remove_col_rename_janitor_clean_candy_2015)
+#view(remove_col_rename_janitor_clean_candy_2015)
 ```
 
 
@@ -77,7 +77,7 @@ view(remove_col_rename_janitor_clean_candy_2015)
 year_remove_col_rename_janitor_clean_candy_2015 <-  remove_col_rename_janitor_clean_candy_2015 %>% 
   mutate(year = coalesce("2015"))
 
-view(year_remove_col_rename_janitor_clean_candy_2015)
+#view(year_remove_col_rename_janitor_clean_candy_2015)
 
 ```
 
@@ -91,7 +91,7 @@ age_year_remove_col_rename_janitor_clean_candy_2015 <- year_remove_col_rename_ja
     # mutate(age = round(age,digit = 0))
 
 
-view(age_year_remove_col_rename_janitor_clean_candy_2015)
+#view(age_year_remove_col_rename_janitor_clean_candy_2015)
 ```
 
 
@@ -107,13 +107,13 @@ view(age_year_remove_col_rename_janitor_clean_candy_2015)
 ```{r}
 #Start cleaning candy_2016
 
-names(candy_2016)
+#names(candy_2016)
 ```
 ```{r}
 #remove columns by range
 clean_candy_2016 <- candy_2016 %>% select(-c(104:123))
 
-names(clean_candy_2016)
+#names(clean_candy_2016)
 ```
 
 ```{r}
@@ -126,7 +126,7 @@ clean_candy_2016 <- clean_candy_2016 %>%
 clean_candy_2016 <- clean_candy_2016 %>% 
   select(-c(6))
 
-names(clean_candy_2016)
+#names(clean_candy_2016)
 
 ```
 
@@ -136,7 +136,7 @@ names(clean_candy_2016)
 janitor_clean_candy_2016 <- clean_candy_2016 %>% 
   clean_names()
 
-view(janitor_clean_candy_2016)
+#view(janitor_clean_candy_2016)
 
 
 
@@ -144,9 +144,9 @@ rename_janitor_clean_candy_2016 <-janitor_clean_candy_2016 %>%
   rename("gender" = "your_gender","age" = "how_old_are_you")
 
 
-rename_janitor_clean_candy_2016
-view(rename_janitor_clean_candy_2016)
-names(rename_janitor_clean_candy_2016)
+#rename_janitor_clean_candy_2016
+#view(rename_janitor_clean_candy_2016)
+#names(rename_janitor_clean_candy_2016)
 ```
 
 
@@ -172,9 +172,9 @@ rename2_janitor_clean_candy_2016 <- rename_janitor_clean_candy_2016 %>%
 remove_col_rename_janitor_clean_candy_2016 <- rename2_janitor_clean_candy_2016 %>% 
   select(-c(6,9,15,16,17,18,19,22,25,28,32,57,76,81,87))
 
-names(remove_col_rename_janitor_clean_candy_2016)
+#names(remove_col_rename_janitor_clean_candy_2016)
 
-view(remove_col_rename_janitor_clean_candy_2016)
+#view(remove_col_rename_janitor_clean_candy_2016)
 
 ```
 
@@ -190,7 +190,7 @@ year_remove_col_rename_janitor_clean_candy_2016 <-  remove_col_rename_janitor_cl
 
 
 ```{r}
-view(year_remove_col_rename_janitor_clean_candy_2016)
+#view(year_remove_col_rename_janitor_clean_candy_2016)
 ```
 
 
@@ -204,7 +204,7 @@ age_year_remove_col_rename_janitor_clean_candy_2016 <- year_remove_col_rename_ja
 
 
 
-view(age_year_remove_col_rename_janitor_clean_candy_2016)
+#view(age_year_remove_col_rename_janitor_clean_candy_2016)
 ```
 
 
@@ -219,7 +219,7 @@ country_year_remove_col_rename_janitor_clean_candy_2016 <- age_year_remove_col_r
 
 
 
-view(country_year_remove_col_rename_janitor_clean_candy_2016)
+#view(country_year_remove_col_rename_janitor_clean_candy_2016)
 # No work, why
 # country_rename_janitor_clean_candy_2016 <- remove_col_rename_janitor_clean_candy_2016 %>%
 #   mutate(country = recode(country,c("us","usa","United States of America")= "USA"))
@@ -248,8 +248,8 @@ view(country_year_remove_col_rename_janitor_clean_candy_2016)
 
 ```{r}
 #Start cleanig data.
-names(candy_2017)
-view(candy_2017)
+#names(candy_2017)
+#view(candy_2017)
 ```
 
 
@@ -259,7 +259,7 @@ view(candy_2017)
 clean_candy_2017 <-candy_2017 %>% 
   select(-c(6,12,19,21,22,23,25,26,27,31,35,38,43,69,70,75,81,96,104,105,107,108,110:120))
 
-names(clean_candy_2017)
+#names(clean_candy_2017)
 #No more cleaning
 # clean_candy_2017 <- clean_candy_2017 %>% 
 #   select(-c(16,93:95))
@@ -279,8 +279,8 @@ names(clean_candy_2017)
 janitor_clean_candy_2017 <- clean_candy_2017 %>% 
   clean_names()
 
-view(janitor_clean_candy_2017)
-names(janitor_clean_candy_2017)
+#view(janitor_clean_candy_2017)
+#names(janitor_clean_candy_2017)
 ```
 
 
@@ -308,8 +308,8 @@ rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>%
 # # remove_col_rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
 #   select(-c(15,52,59,67))
 
-view(rename_janitor_clean_candy_2017)
-names(rename_janitor_clean_candy_2017)
+#view(rename_janitor_clean_candy_2017)
+#names(rename_janitor_clean_candy_2017)
 
 ```
 
@@ -321,7 +321,7 @@ names(rename_janitor_clean_candy_2017)
 year_rename_janitor_clean_candy_2017 <- rename_janitor_clean_candy_2017 %>% 
   mutate(year = coalesce("2017"))
 
-view(year_rename_janitor_clean_candy_2017)
+#view(year_rename_janitor_clean_candy_2017)
 ```
 
 
@@ -333,7 +333,7 @@ country_rename_janitor_clean_candy_2017 <- year_rename_janitor_clean_candy_2017 
   mutate(country = recode(country,"us"= "USA", "england"= "UK","england" = "UK", "Unite states of America" = "USA", "England" = "UK", "uSA" = "USA", "france"=  "France", "croatia" = "Croatia", "USSA"= "USA","USA (I think but it's an election year so who can really tell)" = "USA" , "United States" = "USA","usa"= "USA","uk"= "UK","USA!" = "USA","U.S.A." = "USA","51.0" ="NA","canada"= "Canada","America"= "USA","USA! USA! USA!"= "USA","US"= "USA","United States of America" = "USA","united states"= "USA","Usa" ="USA","U.S."= "USA","Us" ="USA","US" = "USA","Units States" ="USA","belgium" = "Belgium","united states"= "USA","USA USA USA" ="USA", "the best one-usa" = "USA","españa"= "España","u.s."= "USA","United Kingdom"= "UK","hungary"= "Hungary", "united states of america" ="USA","United states" = "USA", "USA! USA!" = "USA","United staes" = "USA","u.s.a." ="USA","USAUSAUSA"= "USA","america"= "America","finland"="Findland","unhinged states"= "Unhinged states", "US of A"= "USA","Unites States" = "USA","The United States of America"= "USA", "The United States" = "USA", "Unied States" = "USA","germany" ="Germany","U S" = "USA","U.K." ="UK","unite satates" = "USA", "cascadaia"= "Cascadia","North Carolina" ="USA","Unhinged states" = "USA","cascadia" ="Cascadia", "canada"= "Canada","USA? Hard to tell anymore.." ="USA","'merica" = "America","Pittsburgh" ="USA","United State" = "USA","United Sates"= "USA","I pretend to be from Canada, but I am really from the United States" = "USA","United Stated" ="USA","Scotland"= "UK","New Jersey" = "USA","CANADA"="Canada","United ststes" = "USA","United Statss" = "USA","enland" = "UK","united States" = "UK","United Statea" = "USA","united ststes" = "USA","	
 USA USA USA!!!!"  = "USA"))
 
-view(country_rename_janitor_clean_candy_2017)
+#view(country_rename_janitor_clean_candy_2017)
 ```
 
 ```{r}
@@ -347,15 +347,15 @@ age_country_rename_janitor_clean_candy_2017 <- country_rename_janitor_clean_cand
 
 ```{r}
 #joins the tables the master tables and save as csv
-view(age_year_remove_col_rename_janitor_clean_candy_2015)
-view(country_year_remove_col_rename_janitor_clean_candy_2016)
-view(age_country_rename_janitor_clean_candy_2017)
+#view(age_year_remove_col_rename_janitor_clean_candy_2015)
+#view(country_year_remove_col_rename_janitor_clean_candy_2016)
+#view(age_country_rename_janitor_clean_candy_2017)
 
 
 candy_master <- bind_rows(age_year_remove_col_rename_janitor_clean_candy_2015,
 country_year_remove_col_rename_janitor_clean_candy_2016,age_country_rename_janitor_clean_candy_2017)
 
-view(candy_master)
+#view(candy_master)
 
 ## Problems with variable year and numbers. Reolve
 
@@ -478,14 +478,12 @@ What was the most popular candy bar in each year?
   pivot_candy_master %>% 
    filter(year == "2015") %>% 
     group_by(candy_question) %>% 
-     count() %>% 
+     count(candy_question) %>% 
       arrange(desc(n))
 
 # Answer. 2015. 
 
 ```
-
-
 
 What was the most popular candy bar by this rating for people in US, Canada, UK, and all other countries?
 

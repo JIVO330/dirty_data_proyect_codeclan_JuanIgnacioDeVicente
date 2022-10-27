@@ -11,7 +11,7 @@ output: html_document
 
 #### **A brief Introduction to the data set**
 
-Who doesn't like candys? This data set is an overview about the consumers' taste during the years 2015,2016 and 2017. This survey was carry out in USA,so mainly it reflected the candy context in that country.However, there were a small proportion of participants from others countries.
+Who doesn't like candys? This data set is an overview about the consumers' taste during the years 2015,2016 and 2017. This survey was carry out in USA,so mainly it reflected the candy context in that country.However, there were a small proportion of participants from others countries. The value of each candy was marked as "JOY","MEH" and "DESPAIR".
 
 
 
@@ -26,13 +26,20 @@ I investigated the possibility to have all the variables in alphabetical order. 
 
 At the start of the cleaning, I wanted to drop all NA values because I thought it would help me during the analysis, but later after read the questions I fell I could not do that, because it was like cheat. After the first question I realized, I should done it.  
 
+Pivot. During the cleaning process is good examine the questions, just in case that is suitable/ necessary pivot columns/rows
 
 
 
+#### **Cleaning steps.**
 
-#### **Cleaning steps.The steps you took to clean the data (you don’t need to write out in detail every step, but a combination of commented code chunks with surrounding overall explanations would be great).**
+My first step was import and run all the possible libraries I would needed and import the raw files.
 
-After import 
+After import the raw data files, I thought to join them before to do any other operation. Fortunately,I was warned to avoid that idea. As I said  before, my lack of a clear tidy strategic made me loss and waste time.
+
+I opened each year once I considered I was finished with the previous year. In each year I develop different ways to remove the columns I thought that they were unnecessary. I used janitor to clear names and I did manual rename. That option, take me to much time for the year 2017, later I learn that I was able to do it with a loop but I was unsure to do that.
+
+I mutate one column to have one "2017".And i experimented issues with the age column and I tried to resolve. However, during the first question I understood I did not do it properly and I did again.
+In addition, I used "pivot_longer" in order to answered  question 4
 
 
 
@@ -66,7 +73,97 @@ Also, in question 4 , it was needed to do a pivot_longer to convert all the cand
 
 #### **Answers**
 
+Q1 What is the total number of candy ratings given across the three years. (Number of candy ratings, not the number of raters. Don’t count missing values)
+```{r, eval = FALSE}
 
+ total_rates <- candy_master %>% 
+   summarise(across(.cols = -c(1:3), ~sum(is.na(.x)))) %>% 
+   rowSums()
+  
+  total_rates #386685
+```
+
+Q2 What was the average age of people who are going out trick or treating?
+```{r, eval = FALSE}
+
+
+average_people_yes <- candy_master %>% 
+  filter(trick_or_treat == "Yes") %>%
+   group_by(trick_or_treat) %>% 
+     summarise(mean_age = mean(age, na.rm = TRUE)) %>% 
+      arrange(mean_age)
+  
+
+average_people_yes #34.92672
+```
+
+Q3 What was the average age of people who are not going trick or treating?
+```{r, eval = FALSE}
+average_people_no <- candy_master %>% 
+  filter(trick_or_treat == "No") %>%
+   group_by(trick_or_treat) %>% 
+     summarise(mean_age = mean(age, na.rm = TRUE)) %>% 
+      arrange(desc(mean_age))
+  
+
+average_people_no # 39.11304
+```
+
+Q4 For each of joy, despair and meh, which candy bar received the most of these ratings?
+```{r, eval = FALSE}
+pivot_candy_master <- candy_master %>% 
+  pivot_longer(cols = -c(1:3),names_to = "candy_question", values_to = "candy_rating")
+
+  pivot_candy_master %>% 
+   filter(candy_rating == "JOY") %>% 
+    group_by(candy_question) %>% 
+     count() %>% 
+      arrange(desc(n))
+     
+# Answer. Joy 3651 dark_chocolate_hershey
+  
+  pivot_candy_master %>% 
+   filter(candy_rating == "DESPAIR") %>% 
+    group_by(candy_question) %>% 
+     count() %>% 
+      arrange(desc(n))
+  
+#Answer. Despair 7288 Kale_smoothie
+  
+  pivot_candy_master %>% 
+   filter(candy_rating == "MEH") %>% 
+    group_by(candy_question) %>% 
+     count() %>% 
+      arrange(desc(n))
+  
+#Answer. Meh 1570 lollipops  
+
+```
+
+
+Q5 How many people rated Starburst as despair?
+```{r, eval = FALSE}
+starbust_despair <- candy_master %>% 
+  count(sum(starburst == "DESPAIR"))
+
+
+starbust_despair #9349 This is wrong
+```
+
+Q6 What was the most popular candy bar by this rating system for each gender in the data set ?
+```{r, eval = FALSE}
+
+```
+
+Q7 What was the most popular candy bar in each year?
+```{r, eval = FALSE}
+
+```
+
+Q8 What was the most popular candy bar by this rating for people in US, Canada, UK, and all other countries?
+```{r, eval = FALSE}
+
+```
 
 
 
