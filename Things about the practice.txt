@@ -1,0 +1,37 @@
+mutate(recode(xxxx-measure-,"NA", cup)
+rename(cake = Cake)
+
+group_by(xxx)pipe
+Count(sort =TRUE)
+
+mutate(across (where(is.character), tolower) significa que mutate a lo largo de todas las columnas donde son caracteres se hagan en minisculas
+
+d>group_by(..)>
+count()
+
+=
+d>
+count(column1, column2)
+
+d>
+group
+
+
+convert any number to integer delete los alphabetical
+
+.rb
+para rename un column
+select(age = xxxxxx)
+
+Hablando del problema de la columna age en candy data
+
+filter(str_derect(age, '[a-z]'),
+str_detect(age,'[0-9]'))>
+mutate(age = as.intenger(str_extract(age,'{0-9]+')))
+
+or 
+mutate(age = readr :: parse_number(age))
+
+country column
+Make your code sel-documenting
+select(country)>
